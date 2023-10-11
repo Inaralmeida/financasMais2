@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button/Button";
+import Button from "../../../common/Button/Button";
 import * as S from "./header.styles";
 import { Link, useNavigate } from 'react-router-dom'
 

@@ -22,13 +22,22 @@ const StyleButton = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  transition: background .3s;
+
+  &:hover{
+    background-color: ${(props) => props.theme.blue500};
+  }
 `;
+
 
 const PrimaryButton = styled(StyleButton)`
   width: ${props => props.width ? props.width : 'fit-content'};
    background: ${(props) => props.theme.blue700};
    border: none; 
    color: ${(props) => props.theme.white50};
+   :hover{
+    background-color: ${(props) => props.theme.blue500};
+  }
 `
 const SecondaryButton = styled(StyleButton)`
    background: transparent;

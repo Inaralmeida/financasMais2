@@ -1,8 +1,8 @@
 import React from 'react'
-import BannerBemVindos from '../../components/BannerBemVindos/BannerBemVindos'
-import BannerDesafioFinanceiro from '../../components/BannerDesafioFinanceiro/BannerDesafioFinanceiro'
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
+import BannerBemVindos from '../../components/views/LandingPage/BannerBemVindos/BannerBemVindos'
+import BannerDesafioFinanceiro from '../../components/views/LandingPage/BannerDesafioFinanceiro/BannerDesafioFinanceiro'
+import Footer from '../../components/views/LandingPage/Footer/Footer'
+import Header from '../../components/views/LandingPage/Header/Header'
 
 const LandingPage = () => {
   return (

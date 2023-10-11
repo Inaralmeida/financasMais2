@@ -7,7 +7,7 @@ import {
   LinkedinLogo,
   PhoneCall,
 } from "@phosphor-icons/react";
-import { tema } from "../../style/theme";
+import { tema } from "../../../../style/theme";
 
 const Footer = () => {
   return (
