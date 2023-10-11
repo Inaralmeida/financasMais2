@@ -10,13 +10,13 @@ const Layout = ({ children }) => {
         <Logo />
         <ul>
           <li>
-            <Link>Dashboard</Link>
+            <Link to='/dashboard'>Dashboard</Link>
           </li>
           <li>
-            <Link>Entradas</Link>
+            <Link to='/transacoes/entradas'>Entradas</Link>
           </li>
           <li>
-            <Link>Saidas</Link>
+            <Link to='/transacoes/saidas'>Saidas</Link>
           </li>
         </ul>
       </aside>

@@ -1,26 +1,31 @@
 import React, { useState } from 'react'
 import Layout from '../../components/shared/Layout/Layout'
+import Transacao from '../../components/views/Dashboard/Transacao/Transacao'
 
 const Dashboard = () => {
 
-  const [contador, setContador] = useState(0)
-
-
-  const handleSetContador = () => {
-    setContador(contador + 1)
-    console.log(contador)
+  const transacao = {
+    id: 'dasdasdasd',
+    data: '11/10/2023',
+    categoria: 'Salario',
+    valor: 10000,
+    tipo: 'saida'
   }
+
+
+
   return (
     <div>
       <Layout >
-        <p>Salve</p>
-        <p>Salve</p>
-        <p>Salve</p>
-        <p>Salve</p>
-        <p>Salve</p>
+        <Transacao
+          id={transacao.id}
+          data={transacao.data}
+          categoria={transacao.categoria}
+          valor={transacao.valor}
+          tipo={transacao.tipo}
+        />
       </Layout>
 
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, illum saepe vero minus, eum ipsam tempora a iste adipisci unde aliquam exercitationem sit cupiditate vel atque nihil optio doloremque quisquam!</p>
     </div>
 
   )

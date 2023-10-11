@@ -20,7 +20,7 @@ const Rotas = () => {
           <Route path='/cadastro' element={<Cadastro />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/' element={<LandingPage />} />
-          <Route path='/transacoes/:id' element={<Transacoes />} />
+          <Route path='/transacoes/:tipo' element={<Transacoes />} />
         </Routes>
 
       </ThemeProvider>
