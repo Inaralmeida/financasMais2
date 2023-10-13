@@ -1,28 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Transacao from '../../components/views/Dashboard/Transacao/Transacao'
 import Layout from '../../components/shared/Layout/Layout'
 import { dataTransacoes } from '../../core/data'
+import { getTransacoes } from '../../service/api'
+import Button from '../../components/common/Button/Button'
 
 const Transacoes = () => {
   const params = useParams()
-  const { usuarios: [usuarioUm] } = dataTransacoes
-  const transacoes = usuarioUm.transacoes
-  const transacao = {
-    id: 'dasdasdasd',
-    data: '11/10/2023',
-    categoria: 'Salario',
-    valor: 10000,
-    tipo: 'saida'
-  }
+  const [listaTransacoes, setListaTransacoes] = useState([])
 
+  async function handleBuscarTransacoes() {
+    const resposta = await getTransacoes('a57501f9407c2174825bb862860ec23a')
+    setListaTransacoes(resposta.data)
+  }
 
   console.log(params)
   return (
     <div>
       <Layout >
         <h2>{params.tipo.toLocaleUpperCase()}</h2>
-        {transacoes.map((transacao) => {
+        <Button
+          onClick={handleBuscarTransacoes}
+          texto={"Buscar transacoes"}
+          variant='primary' />
+        {listaTransacoes.map((transacao) => {
           return (
             <Transacao
               key={transacao.id}
