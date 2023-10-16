@@ -11,7 +11,7 @@ const Transacoes = () => {
   const [listaTransacoes, setListaTransacoes] = useState([])
 
   async function handleBuscarTransacoes() {
-    const resposta = await getTransacoes('a57501f9407c2174825bb862860ec23a')
+    const resposta = await getTransacoes('a57501f9407c2174825bb862860ec23a', params.tipo)
     setListaTransacoes(resposta.data)
   }
 
@@ -19,7 +19,7 @@ const Transacoes = () => {
   return (
     <div>
       <Layout >
-        <h2>{params.tipo.toLocaleUpperCase()}</h2>
+        <h2>{params.tipo.toLocaleUpperCase()}S</h2>
         <Button
           onClick={handleBuscarTransacoes}
           texto={"Buscar transacoes"}

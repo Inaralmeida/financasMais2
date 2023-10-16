@@ -9,7 +9,7 @@ export const getCategorias = async (endpoint) => {
   console.log(resposta.data)
 }
 
-export const getTransacoes = async (idUsuario) => {
-  const resposta = await api.get(`/usuario/${idUsuario}/transacoes/`)
+export const getTransacoes = async (idUsuario, tipo) => {
+  const resposta = await api.get(`/usuario/${idUsuario}/transacoes/${tipo}`)
   return resposta.data
 }
