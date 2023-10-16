@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom';
 import Button from '../../components/common/Button/Button';
 import Logo from '../../components/common/Logo/Logo';
@@ -7,6 +7,8 @@ import { StyleContainerLogin } from './login.styles'
 import login from "/login1.svg";
 
 const Login = () => {
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
   return (
     <StyleContainerLogin>
       <div className="content">
@@ -19,7 +21,8 @@ const Login = () => {
             placeholder="email@email.com"
             type="email"
             required
-
+            value={email}
+            onChange={(e) => setEmail(e)}
 
           />
 
@@ -29,11 +32,9 @@ const Login = () => {
             placeholder="●●●●●●●"
             type="password"
             required
-
+            value={senha}
+            onChange={(e) => setSenha(e)}
           />
-
-
-
           <p>
             Ainda não tem conta?{" "}
             <Link to="/cadastro" className="destaque">

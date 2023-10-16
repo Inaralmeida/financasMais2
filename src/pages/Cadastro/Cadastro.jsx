@@ -11,6 +11,9 @@ const Cadastro = () => {
 
   const [nome, setNome] = useState('')
   const [sobrenome, setSobrenome] = useState('')
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
+  const [confirmaSenha, setConfirmaSenha] = useState('')
 
 
   const navigate = useNavigate()
@@ -45,15 +48,17 @@ const Cadastro = () => {
             onChange={(e) => setNome(e)}
 
           />
-          {/* <Textfield
+          <Textfield
             nome="sobrenome"
             label="Sobrenome"
             type="text"
             required
             placeholder="Silva"
+            value={sobrenome}
+            onChange={(e) => setSobrenome(e)}
 
-          /> */}
-          <input type="text" value={sobrenome} onChange={(evento) => setSobrenome(evento.target.value)} />
+          />
+          
         </div>
         <Textfield
           nome="email"
@@ -61,6 +66,8 @@ const Cadastro = () => {
           type="email"
           required
           placeholder="mariasilva@gmail.com"
+          value={email}
+          onChange={(e) => setEmail(e)}
 
         />
         <Textfield
@@ -69,7 +76,8 @@ const Cadastro = () => {
           type="password"
           required
           placeholder="●●●●●●●"
-
+          value={senha}
+          onChange={(e) => setSenha(e)}
         />
         <Textfield
           nome="confirmaSenha"
@@ -77,6 +85,8 @@ const Cadastro = () => {
           type="password"
           required
           placeholder="●●●●●●●"
+          value={confirmaSenha}
+          onChange={(e) => setConfirmaSenha(e)}
         />
 
         <p>
