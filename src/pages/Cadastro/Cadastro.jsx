@@ -6,6 +6,7 @@ import { StyleContainerCadastro } from "./Cadastro.styles";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'
 import cadastro from "/cadastro.svg";
+import { postUsuario } from "../../service/api";
 
 const Cadastro = () => {
 
@@ -18,9 +19,25 @@ const Cadastro = () => {
 
   const navigate = useNavigate()
 
-  const handleCadastro = () => {
+  const handleCadastro = async (e) => {
+    e.preventDefault()
 
-    console.log('nome:', nome, '\nsobrenome:', sobrenome)
+    const body = {
+      nome,
+      sobrenome,
+      email
+    }
+
+    if (senha === confirmaSenha) {
+      const resposta = await postUsuario(body, senha)
+      localStorage.setItem('id', resposta.data.id)
+      localStorage.setItem('nome', resposta.data.nome)
+      console.log(resposta)
+
+    } else {
+      console.log('as senhas precisam ser iguais')
+    }
+
   }
   return (
     <StyleContainerCadastro>
@@ -58,7 +75,7 @@ const Cadastro = () => {
             onChange={(e) => setSobrenome(e)}
 
           />
-          
+
         </div>
         <Textfield
           nome="email"
