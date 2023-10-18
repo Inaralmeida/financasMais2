@@ -1,11 +1,11 @@
 import { X } from "@phosphor-icons/react";
 import React from "react";
 import styled from "styled-components";
-import { theme } from "../../../styles/theme";
+import { tema } from "../../../style/theme";
 
-const Modal = ({ open, title, onClose, children }) => {
+const Modal = ({ open, title, fechaModal, children }) => {
   const handleClose = (e) => {
-    e.target.id === "modal" && onClose();
+    e.target.id === "modal" && fechaModal();
   };
   return (
     <>
@@ -15,8 +15,8 @@ const Modal = ({ open, title, onClose, children }) => {
             <section className="header">
               <h2>{title}</h2>
               <X
-                color={theme.blue500}
-                onClick={onClose}
+                color={tema.blue500}
+                onClick={fechaModal}
                 cursor="pointer"
                 size={32}
               />
