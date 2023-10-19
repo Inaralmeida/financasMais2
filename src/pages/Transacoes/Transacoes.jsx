@@ -1,18 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Button from '../../components/common/Button/Button'
 import Modal from '../../components/common/Modal/Modal'
 import Notificacao from '../../components/common/Notificacao/Notificacao'
 import Layout from '../../components/shared/Layout/Layout'
 import Transacao from '../../components/views/Dashboard/Transacao/Transacao'
-import { deleteTransacao, getCategorias, getTransacoes, postTransacao, putTransacao } from '../../service/api'
+import { TransacoesContext } from '../../core/contexto/useTransacoes'
+import { deleteTransacao, postTransacao, putTransacao } from '../../service/api'
 import { StylesTransacoes } from './transacoes.styles'
 
 const Transacoes = () => {
   const params = useParams()
-  const [listaTransacoes, setListaTransacoes] = useState([])
+  const { categorias,
+    hendleBuscaCategorias, entradas,
+    saidas,
+    handleGetTransacoes, } = useContext(TransacoesContext)
+
   const [modalTaAberto, setModalTaAberto] = useState(false)
-  const [categorias, setCategorias] = useState([])
+
+  const [listaTransacoes, setListaTransacoes] = useState(params.tipo === 'entrada' ? entradas : saidas)
 
   const [valorTransacao, setValorTransacao] = useState('')
   const [descricaoTransacao, setDescricaoTransacao] = useState('')
@@ -65,16 +71,6 @@ const Transacoes = () => {
     setEEdicao(false)
   }
 
-  async function handleBuscarTransacoes() {
-    const resposta = await getTransacoes('a57501f9407c2174825bb862860ec23a', params.tipo)
-    setListaTransacoes(resposta.data)
-  }
-
-  async function hendleBuscaCategorias() {
-    const resposta = await getCategorias()
-    setCategorias(resposta.data)
-  }
-
   async function handleSalvarTransacao() {
     const body = {
       valor: valorTransacao, categoria: categoriaSelecionada, descricao: descricaoTransacao, tipo: params.tipo
@@ -113,7 +109,8 @@ const Transacoes = () => {
   }
 
   useEffect(() => {
-    handleBuscarTransacoes()
+    handleGetTransacoes()
+    setListaTransacoes(params.tipo === 'entrada' ? entradas : saidas)
   }, [params])
 
   useEffect(() => {
