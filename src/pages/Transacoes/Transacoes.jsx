@@ -5,7 +5,7 @@ import Modal from '../../components/common/Modal/Modal'
 import Notificacao from '../../components/common/Notificacao/Notificacao'
 import Layout from '../../components/shared/Layout/Layout'
 import Transacao from '../../components/views/Dashboard/Transacao/Transacao'
-import { getCategorias, getTransacoes, postTransacao, putTransacao } from '../../service/api'
+import { deleteTransacao, getCategorias, getTransacoes, postTransacao, putTransacao } from '../../service/api'
 import { StylesTransacoes } from './transacoes.styles'
 
 const Transacoes = () => {
@@ -19,6 +19,8 @@ const Transacoes = () => {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('')
   const [dataTrasacao, setDataTrasacao] = useState('')
   const [idTransacao, setIdTransacao] = useState('')
+
+  const [modalDelete, setModalDelete] = useState(true)
 
   const [infosNotificacao, setInfosNotificacao] = useState({
     tipo: '',
@@ -73,7 +75,6 @@ const Transacoes = () => {
     setCategorias(resposta.data)
   }
 
-
   async function handleSalvarTransacao() {
     const body = {
       valor: valorTransacao, categoria: categoriaSelecionada, descricao: descricaoTransacao, tipo: params.tipo
@@ -90,6 +91,25 @@ const Transacoes = () => {
     })
     setAbrirNotificacao(true)
     setModalTaAberto(false)
+  }
+
+  async function handleDeleteTransacao() {
+    const resposta = await deleteTransacao(idTransacao, 'a57501f9407c2174825bb862860ec23a')
+    setModalDelete(false)
+
+    handleBuscarTransacoes()
+
+    setInfosNotificacao({
+      texto: resposta.success ? 'Transacao excluida com sucesso' : 'Falha ao excluir transação',
+      tipo: resposta.success ? 'sucesso' : 'falha'
+    })
+
+    setAbrirNotificacao(true)
+  }
+
+  function handleAbrirModalDelete(idTransacao) {
+    setIdTransacao(idTransacao)
+    setModalDelete(true)
   }
 
   useEffect(() => {
@@ -129,6 +149,7 @@ const Transacoes = () => {
                   tipo={transacao.tipo}
                   descricao={transacao.descricao}
                   handleEditarTransacao={handleEditarTransacao}
+                  handleAbrirModalDelete={handleAbrirModalDelete}
                 />
               )
             })}
@@ -136,6 +157,7 @@ const Transacoes = () => {
         </StylesTransacoes>
 
       </Layout>
+      {/* MODAL DE CRIAR E EDITAR A TRANSAÇÃO  */}
       <Modal title={params.tipo} open={modalTaAberto} fechaModal={() => setModalTaAberto(false)}>
 
         <label htmlFor="">valor</label>
@@ -157,6 +179,13 @@ const Transacoes = () => {
         <button onClick={eEdicao ? handlePutTransacao : handleSalvarTransacao}>{eEdicao ? 'Salvar alterações' : 'ADICIONAR'}</button>
       </Modal>
 
+      {/* MODAL - EXCLUIR A TRANSACAO */}
+
+      <Modal open={modalDelete} title={'Excluir'} fechaModal={() => setModalDelete(false)}>
+        <h3>Você deseja realmente excluir essa transação?</h3>
+        <Button texto={'sim'} variant={'primary'} onClick={handleDeleteTransacao} />
+      </Modal>
+
       {
         abrirNotificacao && <Notificacao
           texto={infosNotificacao.texto}
@@ -173,4 +202,4 @@ export default Transacoes
 
 
 // 1 - ter um estado de controle aberto/fechado (boolean)
-// 2 - importar o modal
+// 2 - importar o modalimport Button from './../../components/common/Button/Button';

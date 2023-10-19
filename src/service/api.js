@@ -84,3 +84,21 @@ export const putTransacao = async (idTransacao, body, idUsuario) => {
     }
   }
 }
+
+export const deleteTransacao = async (idTransacao, idUsuario) => {
+  try {
+    const resposta = await api.delete(`/usuario/${idUsuario}/deletar/${idTransacao}`)
+    return resposta.data
+  } catch (error) {
+    if (error.response) {
+      return {
+        message: error.response.data.message,
+        success: error.response.data.success,
+      }
+    } else {
+      return {
+        message: 'erro inesperado',
+      }
+    }
+  }
+}
